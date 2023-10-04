@@ -1,18 +1,28 @@
 import { useState } from "react"; // to set react component we use useState
 const Home = () => {
-  const [name, setName] = useState("omarion"); // we use hook to set the variable, and value could be anything= string, number, boolean
-  const [age, setAge] = useState(25); // we use hook to set the variable, and value could be anything= string, number, boolean
-  const handleClick = () => {
-    setName("luigi");
-    setAge(30);
-  };
+  const [blogs, setBlogs] = useState([
+    {
+      title: "My new Website",
+      body: "Lorem ipsum...",
+      author: "marion",
+      id: 1,
+    },
+    { title: "Welcome party!", body: "Lorem ipsum...", author: "yoshi", id: 2 },
+    {
+      title: "Web dev top tops",
+      body: "Lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
+  ]);
   return (
     <div className="home">
-      <h2>Homepage</h2>
-      <p>
-        {name} is {age} years old
-      </p>
-      <button onClick={handleClick}>Click me</button>
+      {blogs.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <h2>{blog.title}</h2>
+          <p>Written by {blog.author}</p>
+        </div>
+      ))}
     </div>
   );
 };
