@@ -1,4 +1,4 @@
-import { useState } from "react"; // to set react component we use useState
+import { useState, useEffect } from "react"; // to set react component we use useState
 import BlogList from "./BlogList";
 const Home = () => {
   const [blogs, setblogs] = useState([
@@ -21,13 +21,31 @@ const Home = () => {
       id: 3,
     },
   ]);
+  const [name, setName] = useState("mariona");
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
+    setblogs(newBlogs);
+  };
+
+  useEffect(() => {
+    console.log("use effect ran");
+    console.log(name);
+  }, [name]);
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="all right ma nigga!!!" />
       <BlogList
-        blogs={blogs.filter((blog) => blog.author === "mark")}
-        title="Mark blogs!"
+        blogs={blogs}
+        title="all right ma nigga!!!"
+        handleDelete={handleDelete}
       />
+      <button
+        onClick={() => {
+          setName("luigi");
+        }}
+      >
+        set name
+      </button>
+      <p>{name}</p>
     </div>
   );
 };
